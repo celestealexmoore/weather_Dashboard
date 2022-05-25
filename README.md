@@ -21,7 +21,7 @@
 
 ## Media
 
-![The following animation demonstrates the application functionality:](./Assets/images/06-server-side-apis-homework-demo.png)
+![The following animation demonstrates the application functionality:](./assets/images/06-server-side-apis-homework-demo.png)
 
 ## Deployed Site
 
