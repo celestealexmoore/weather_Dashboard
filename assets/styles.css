@@ -1,0 +1,19 @@
+.row {
+  background-color: rgb(44, 43, 43);
+  color: white;
+}
+
+.leftDiv {
+  background-color: rgb(216, 215, 215);
+}
+
+.searchBarIcon {
+  background-color: rgb(69, 117, 248);
+  padding: 1px;
+  border-color: rgb(105, 140, 185);
+  color: white;
+  text-align: center;
+}
+.appendListItem {
+  color: gray;
+}
