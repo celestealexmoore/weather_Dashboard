@@ -1,19 +1,26 @@
-.row {
+.title {
   background-color: rgb(44, 43, 43);
   color: white;
+  margin: 0;
+  padding: 10px;
 }
 
-.leftDiv {
-  background-color: rgb(216, 215, 215);
+#leftDivContainer {
+  padding: 15px;
+  background-color: rgb(226, 226, 226);
 }
 
-.searchBarIcon {
-  background-color: rgb(69, 117, 248);
-  padding: 1px;
-  border-color: rgb(105, 140, 185);
-  color: white;
-  text-align: center;
+#search-button {
+  height: fit-content;
+  border: rgb(121, 186, 247) 3px solid;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(85, 168, 245);
 }
-.appendListItem {
+/* .appendListItem {
   color: gray;
+} */
+
+#rightDiv {
+  background-color: lightblue;
+  padding: 10px;
 }
