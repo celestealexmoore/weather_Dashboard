@@ -38,7 +38,7 @@ const searchButton = document.createElement("div");
 searchButton.setAttribute("id", "search-button");
 searchButton.setAttribute("type", "button");
 searchButton.setAttribute("class", "btn btn-primary");
-
+// searchIcon
 const searchIcon = document.createElement("i");
 searchIcon.setAttribute("class", "bi bi-search");
 //rightDiv Container
@@ -64,11 +64,11 @@ searchButton.appendChild(searchIcon);
 inputGroup.appendChild(searchButton);
 
 //beginning of logic:
-const api_key = "37da8c9a08447f616fa749bd4ecfb171";
-const requestURL =
-  "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=" + api_key;
+searchButton.onclick = function () {
 
-// "http://api.openweathermap.org/geo/1.0/direct?q=_____where the target goes____&limit=5&appid=api_key;"
+const api_key = "12238cffbe773f1e1977fae9e256dc2e";
+const requestURL =
+  `http://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=` + api_key;
 
 let currentDate = moment().format("MM/D/YYYY");
 
@@ -85,7 +85,6 @@ function getForecast() {
       searchResultsEl.setAttribute("class", "list-group");
       leftDivContainer.appendChild(searchResultsEl);
       //onclick searchBar functionality
-      searchButton.onclick = function () {
         localStorage.setItem("citySearch", searchInput.value);
         fetchedData.push(localStorage.getItem("citySearch"));
         function appendIt() {
@@ -102,26 +101,31 @@ function getForecast() {
         }
         appendIt();
         //can include the if-statement here. If there is fetched data: (hatchways js lines 92-100)
-      };
       // city title right div | this container has two children: cityNameDiv and currentWeatherDiv
       let rightDivTop = document.createElement("div");
       rightDivTop.setAttribute("class", "container rightDivTop");
       let cityNameDiv = document.createElement("div");
       cityNameDiv.setAttribute("class", "h4");
       let cityName = data.city.name;
-      let cloudIcon = document.createElement("i");
-      cloudIcon.setAttribute("class", "bi bi-cloud cloudIcon");
+      let cloudIcon = document.createElement("img");
+      cloudIcon.setAttribute("src", `http://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png`);
       cityNameDiv.innerText = cityName + " (" + currentDate + ") ";
       rightDivTop.appendChild(cityNameDiv);
       cityNameDiv.appendChild(cloudIcon);
       //currentWeather example array
       let currentWeather = [
-        "Temperature:",
-        "Humidity:",
-        "Wind Speed:",
-        "UV Index:",
+        "Temperature: ",
+        "Humidity: ",
+        "Wind Speed: ",
+        "High: ",
       ];
-      let fillingInInfo = ["90.9°F", "41%", "4.7 MPH", "9.49"]; // delete and access through API
+      let min = Math.round((data.list[0].main.temp_min - 273.15) *1.8)+32
+      let dataFetch = [
+        Math.round((data.list[0].main.temp - 273.15) * 1.8) + 32 + "°F",
+        data.list[0].main.humidity + "%",
+        data.list[0].wind.speed + " MPH",
+        Math.round((data.list[0].main.temp_max - 273.15) * 1.8)+32 + "°F |" + " Low: " + min + "°F"
+      ];
       let currentWeatherContainer = document.createElement("ul");
       currentWeatherContainer.setAttribute("class", "list-group");
       rightDivTop.appendChild(currentWeatherContainer);
@@ -129,7 +133,7 @@ function getForecast() {
       for (let j = 0; j < currentWeather.length; j++) {
         let weatherRow = document.createElement("li");
         weatherRow.setAttribute("class", "list-group-item border-0");
-        weatherRow.textContent = currentWeather[j] + " " + fillingInInfo[j];
+        weatherRow.textContent = currentWeather[j] + dataFetch[j];
         currentWeatherContainer.appendChild(weatherRow);
       }
       //5-day forecast div
@@ -139,8 +143,38 @@ function getForecast() {
       let rightBottomTitle = document.createElement("div");
       rightBottomTitle.setAttribute("class", "h4");
       rightBottomTitle.innerText = "5-Day Forecast:";
-      //example array
-      let exampleArray = ["8/16/2022", "Temp: 88.46", "Humidity: 37%"];
+
+      let dateArray = [
+        moment(data.list[0].dt_txt).format("M/DD/YYYY"),
+        moment(data.list[5].dt_txt).format("M/DD/YYYY"),
+        moment(data.list[13].dt_txt).format("M/DD/YYYY"),
+        moment(data.list[21].dt_txt).format("M/DD/YYYY"),
+        moment(data.list[29].dt_txt).format("M/DD/YYYY"),
+      ];
+      let tempArray = [
+        "Temp: " +
+          (Math.round((data.list[0].main.feels_like - 273.15) * 1.8) + 32) +
+          "°F",
+        "Temp: " +
+          (Math.round((data.list[5].main.feels_like - 273.15) * 1.8) + 32) +
+          "°F",
+        "Temp: " +
+          (Math.round((data.list[13].main.feels_like - 273.15) * 1.8) + 32) +
+          "°F",
+        "Temp: " +
+          (Math.round((data.list[21].main.feels_like - 273.15) * 1.8) + 32) +
+          "°F",
+        "Temp: " +
+          (Math.round((data.list[29].main.feels_like - 273.15) * 1.8) + 32) +
+          "°F",
+      ];
+      let humidityArray = [
+        "Humidity: " + data.list[0].main.humidity + "%",
+        "Humidity: " + data.list[5].main.humidity + "%",
+        "Humidity: " + data.list[13].main.humidity + "%",
+        "Humidity: " + data.list[21].main.humidity + "%",
+        "Humidity: " + data.list[29].main.humidity + "%",
+      ];
       //forecast container
       let ongoingForecastContainer = document.createElement("div");
       ongoingForecastContainer.setAttribute(
@@ -153,29 +187,36 @@ function getForecast() {
       for (let k = 0; k < 5; k++) {
         let forecastEl = document.createElement("div");
         forecastEl.setAttribute("class", "col forecastEl");
-        // forecastEl.innerText = "hello world"
         ongoingForecastRow.appendChild(forecastEl);
         //nested for loop to append forecast information
         for (let l = 0; l < 1; l++) {
-          let forecastUl = document.createElement("div");
-          forecastUl.setAttribute("class", "ul forecastUl");
-          let forecastLiDate = document.createElement("li");
-          forecastLiDate.setAttribute("class", "list-group-item border-0");
-          forecastLiDate.innerHTML = exampleArray[0];
-          let forecastIcon = document.createElement("i");
-          forecastIcon.setAttribute("class", "bi bi-brightness-high sunIcon");
-          let forecastLiTemp = document.createElement("li");
-          forecastLiTemp.setAttribute("class", "list-group-item border-0");
-          forecastLiTemp.innerHTML = exampleArray[1] + "°F";
-          let forecastLiHumidity = document.createElement("li");
-          forecastLiHumidity.setAttribute("class", "list-group-item border-0");
-          forecastLiHumidity.innerHTML = exampleArray[2];
-          //append Children
-          forecastEl.appendChild(forecastUl);
-          forecastUl.appendChild(forecastLiDate);
-          forecastUl.appendChild(forecastIcon);
-          forecastUl.appendChild(forecastLiTemp);
-          forecastUl.appendChild(forecastLiHumidity);
+          function forecastDataLoop() {
+
+            let forecastUl = document.createElement("div");
+            forecastUl.setAttribute("class", "ul forecastUl");
+            let forecastLiDate = document.createElement("li");
+            forecastLiDate.setAttribute("class", "list-group-item border-0");
+            forecastLiDate.innerHTML = dateArray[k];
+            let forecastIcon = document.createElement("img");
+            forecastIcon.setAttribute("src", `http://openweathermap.org/img/w/${data.list[k].weather[0].icon}.png`);
+            let forecastLiTemp = document.createElement("li");
+            forecastLiTemp.setAttribute("class", "list-group-item border-0");
+            forecastLiTemp.innerText = tempArray[k];
+            let forecastLiHumidity = document.createElement("li");
+            forecastLiHumidity.setAttribute(
+              "class",
+              "list-group-item border-0"
+            );
+            forecastLiHumidity.innerHTML = humidityArray[k];
+
+            //append Children
+            forecastEl.appendChild(forecastUl);
+            forecastUl.appendChild(forecastLiDate);
+            forecastUl.appendChild(forecastIcon);
+            forecastUl.appendChild(forecastLiTemp);
+            forecastUl.appendChild(forecastLiHumidity);
+          }
+          forecastDataLoop();
         }
       }
 
@@ -187,3 +228,5 @@ function getForecast() {
     });
 }
 getForecast();
+
+};

@@ -3,6 +3,7 @@
 # weather_Dashboard
 
 ### _This application is a weather dashboard that runs in the browser and features dynamically updated HTML and CSS, as well as the OpenWeather API to retrieve weather data for cities._
+
 </div>
 
 ## Table of Contents
@@ -21,11 +22,13 @@
 
 ## Media
 
-![The following animation demonstrates the application functionality:](./assets/images/06-server-side-apis-homework-demo.png)
+[What was required:](./assets/images/06-server-side-apis-homework-demo.png)
+
+[What I've Built:](./assets/images/appPhoto.png)
 
 ## Deployed Site
 
-   [The correct link is coming soon. In the meantime, play this game I built.](https://celestealexmoore.github.io/Rock-Paper-Scissors/)
+[The correct link is coming soon. In the meantime, play this game I built.](https://celestealexmoore.github.io/Rock-Paper-Scissors/)
 
 ## Contributors
 
