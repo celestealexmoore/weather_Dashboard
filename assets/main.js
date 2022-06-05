@@ -1,3 +1,10 @@
+/* 
+With a tutor:
+1) Figure out how to link two JS files to each other using the module system.
+2) searchInput.value is re-appending same information multiple times.
+3) for each search, entire page is re-rendering to body, but I want to replace the current info with the new search info.
+*/
+
 // globalVariables
 let fetchedData = [];
 // bodyChildren
