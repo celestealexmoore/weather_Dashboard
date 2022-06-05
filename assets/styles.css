@@ -7,7 +7,11 @@
 
 #leftDivContainer {
   padding: 15px;
-  background-color: rgb(226, 226, 226);
+  background-color: rgb(241, 241, 241);
+}
+
+.input-group {
+  flex-wrap: nowrap;
 }
 
 #search-button {
@@ -16,11 +20,39 @@
   border-radius: 5px;
   box-shadow: 0 0 10px rgb(85, 168, 245);
 }
-/* .appendListItem {
-  color: gray;
-} */
 
 #rightDiv {
-  background-color: lightblue;
   padding: 10px;
+}
+
+.rightDivBottom {
+  margin-top: 15px;
+}
+
+.rightDivTop {
+  border: solid rgb(207, 206, 206) 1px;
+  border-radius: 5px;
+  padding: 40px;
+}
+
+.cityNames {
+  color: rgb(143, 141, 141);
+}
+
+.cloudIcon {
+  color: rgb(66, 130, 190);
+}
+
+.forecastEl {
+  background-color: rgb(51, 136, 233);
+  color: white;
+  margin: 2px;
+  padding: 15px;
+  border-radius: 5px;
+  /* width: 150px;
+    height: 200px; */
+}
+
+.forecastUl {
+    line-height: 3;
 }
