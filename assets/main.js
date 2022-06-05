@@ -7,6 +7,11 @@ With a tutor:
 
 // globalVariables
 let fetchedData = [];
+// for (let i = 0; i < 1; i++) {
+//   if (localStorage.getItem('citySearch')) {
+//     fetchedData.push(localStorage.getItem("citySearch[i]"));
+//   }
+// }
 // bodyChildren
 const body = document.getElementById("body");
 const title = document.createElement("div");
@@ -73,7 +78,7 @@ inputGroup.appendChild(searchButton);
 searchButton.onclick = function () {
   const api_key = "12238cffbe773f1e1977fae9e256dc2e";
   const requestURL =
-    `http://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=` +
+    `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=` +
     api_key;
   let currentDate = moment().format("MM/D/YYYY");
   // function
@@ -89,8 +94,9 @@ searchButton.onclick = function () {
         searchResultsEl.setAttribute("class", "list-group");
         leftDivContainer.appendChild(searchResultsEl);
         //onclick searchBar functionality
+        fetchedData.push(searchInput.value);
         localStorage.setItem("citySearch", searchInput.value);
-        fetchedData.push(localStorage.getItem("citySearch"));
+        // fetchedData.push(localStorage.getItem("citySearch"));
         function appendIt() {
           for (let i = 0; i < fetchedData.length; i++) {
             let appendCitiesRow = document.createElement("a");
