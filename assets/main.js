@@ -78,7 +78,7 @@ inputGroup.appendChild(searchButton);
 searchButton.onclick = function () {
   const api_key = "12238cffbe773f1e1977fae9e256dc2e";
   const requestURL =
-    `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=` +
+    `api.openweathermap.org/data/2.5/forecast?q=${searchInput.value}&appid=` +
     api_key;
   let currentDate = moment().format("MM/D/YYYY");
   // function
