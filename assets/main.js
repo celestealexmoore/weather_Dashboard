@@ -1,3 +1,5 @@
+// globalVariables
+let fetchedData = [];
 // bodyChildren
 const body = document.getElementById("body");
 const title = document.createElement("div");
@@ -36,6 +38,7 @@ const searchButton = document.createElement("div");
 searchButton.setAttribute("id", "search-button");
 searchButton.setAttribute("type", "button");
 searchButton.setAttribute("class", "btn btn-primary");
+
 const searchIcon = document.createElement("i");
 searchIcon.setAttribute("class", "bi bi-search");
 //rightDiv Container
@@ -65,6 +68,8 @@ const api_key = "37da8c9a08447f616fa749bd4ecfb171";
 const requestURL =
   "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=" + api_key;
 
+// "http://api.openweathermap.org/geo/1.0/direct?q=_____where the target goes____&limit=5&appid=api_key;"
+
 let currentDate = moment().format("MM/D/YYYY");
 
 // function
@@ -75,33 +80,29 @@ function getForecast() {
     })
     .then(function (data) {
       console.log(data);
-
       // cities appended to search results
       let searchResultsEl = document.createElement("div");
       searchResultsEl.setAttribute("class", "list-group");
       leftDivContainer.appendChild(searchResultsEl);
-      //example array
-      let citiesArray = [
-        "Austin",
-        "Chicago",
-        "New York",
-        "Orlando",
-        "San Francisco",
-        "Seattle",
-        "Denver",
-        "Atlanta",
-      ];
-      //for loop fetching example array
-      for (let i = 0; i < citiesArray.length; i++) {
-        let appendCitiesRow = document.createElement("a");
-        appendCitiesRow.setAttribute("href", "#");
-        appendCitiesRow.setAttribute(
-          "class",
-          "list-group-item list-group-item-action cityNames"
-        );
-        appendCitiesRow.textContent = citiesArray[i];
-        searchResultsEl.appendChild(appendCitiesRow);
-      }
+      //onclick searchBar functionality
+      searchButton.onclick = function () {
+        localStorage.setItem("citySearch", searchInput.value);
+        fetchedData.push(localStorage.getItem("citySearch"));
+        function appendIt() {
+          for (let i = 0; i < fetchedData.length; i++) {
+            let appendCitiesRow = document.createElement("a");
+            appendCitiesRow.setAttribute("href", "#");
+            appendCitiesRow.setAttribute(
+              "class",
+              "list-group-item list-group-item-action cityNames"
+            );
+            appendCitiesRow.textContent = fetchedData[i];
+            searchResultsEl.appendChild(appendCitiesRow);
+          }
+        }
+        appendIt();
+        //can include the if-statement here. If there is fetched data: (hatchways js lines 92-100)
+      };
       // city title right div | this container has two children: cityNameDiv and currentWeatherDiv
       let rightDivTop = document.createElement("div");
       rightDivTop.setAttribute("class", "container rightDivTop");
