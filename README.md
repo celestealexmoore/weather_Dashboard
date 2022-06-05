@@ -22,13 +22,15 @@
 
 ## Media
 
-[What was required:](./assets/images/06-server-side-apis-homework-demo.png)
+What was required:
+![What was required:](./assets/images/06-server-side-apis-homework-demo.png)
 
-[What I've Built:](./assets/images/appPhoto.png)
+What I've built:
+![What I've Built:](./assets/images/appPhoto.png)
 
 ## Deployed Site
 
-[The correct link is coming soon. In the meantime, play this game I built.](https://celestealexmoore.github.io/Rock-Paper-Scissors/)
+[This is the link to access the deployed application.](https://celestealexmoore.github.io/weather_Dashboard/)
 
 ## Contributors
 
